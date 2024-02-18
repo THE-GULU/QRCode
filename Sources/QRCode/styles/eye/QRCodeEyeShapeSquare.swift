@@ -21,6 +21,7 @@
 
 import CoreGraphics
 import Foundation
+import SwiftUI
 
 public extension QRCode.EyeShape {
 	/// A 'square' style eye design
@@ -41,21 +42,45 @@ public extension QRCode.EyeShape {
 		}
 
 		public func eyePath() -> CGPath {
-			let squareEyePath = CGMutablePath()
-			squareEyePath.move(to: CGPoint(x: 70, y: 70))
-			squareEyePath.line(to: CGPoint(x: 20, y: 70))
-			squareEyePath.line(to: CGPoint(x: 20, y: 20))
-			squareEyePath.line(to: CGPoint(x: 70, y: 20))
-			squareEyePath.line(to: CGPoint(x: 70, y: 70))
-			squareEyePath.close()
-			squareEyePath.move(to: CGPoint(x: 80, y: 80))
-			squareEyePath.curve(to: CGPoint(x: 80, y: 10), controlPoint1: CGPoint(x: 80, y: 80), controlPoint2: CGPoint(x: 80, y: 10))
-			squareEyePath.line(to: CGPoint(x: 10, y: 10))
-			squareEyePath.line(to: CGPoint(x: 10, y: 80))
-			squareEyePath.line(to: CGPoint(x: 80, y: 80))
-			squareEyePath.line(to: CGPoint(x: 80, y: 80))
-			squareEyePath.close()
-			return squareEyePath
+            let rectWidth = 60
+            let rectHeight = 50
+            let zigzagHeight: Int = 5
+            let zigzagwidth: Int = rectWidth/6
+            var startX = 75
+            var startY = 70
+
+            var guluEyePath = Path()
+            
+            guluEyePath.move(to: CGPoint(x: startX, y: startY))
+            
+            for i in 1...6 {
+                startX -= Int(zigzagwidth)
+                if i%2 == 0 {
+                    startY -= zigzagHeight
+                } else {
+                    startY += zigzagHeight
+                }
+                guluEyePath.addLine(to: CGPoint(x: startX, y: startY))
+            }
+            
+            guluEyePath.addLine(to: CGPoint(x: startX, y: startY - rectHeight))
+
+            var newY = 20
+            
+            for i in 1...6 {
+                startX += Int(zigzagwidth)
+                if i%2 == 0 {
+                    newY += zigzagHeight
+                } else {
+                    newY -= zigzagHeight
+                }
+                guluEyePath.addLine(to: CGPoint(x: startX, y: newY))
+            }
+            guluEyePath.closeSubpath()
+            
+            let newpath = guluEyePath.strokedPath(.init(lineWidth: 10))
+            
+            return newpath.cgPath
 		}
 
 		@objc public func eyeBackgroundPath() -> CGPath {
