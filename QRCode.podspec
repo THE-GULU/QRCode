@@ -6,7 +6,7 @@ s.summary                    = 'A simple drop-in macOS/iOS/tvOS/watchOS QR Code 
 s.homepage                   = 'https://github.com/dagronf/QRCode'
 s.license                    = { :type => 'MIT', :file => 'LICENSE' }
 s.author                     = { 'Darren Ford' => 'dford_au-reg@yahoo.com' }
-s.source                     = { :git => 'https://github.com/dagronf/QRCode.git', :tag => s.version.to_s }
+s.source                     = { :git => 'https://github.com/THE-GULU/QRCode.git', :tag => s.version.to_s }
 
 s.module_name                = 'QRCode'
 
