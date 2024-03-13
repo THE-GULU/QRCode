@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 
-s.name                       = 'DSF_QRCode'
+s.name                       = 'QRCode'
 s.version                    = '17.1.0'
 s.summary                    = 'A simple drop-in macOS/iOS/tvOS/watchOS QR Code generator view for Swift, Objective-C and SwiftUI.'
 s.homepage                   = 'https://github.com/dagronf/QRCode'
